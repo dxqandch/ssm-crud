@@ -1,0 +1,32 @@
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "mybatis-3-config.dtd" >
+<configuration>
+    <properties resource="jdbcconfig.properties"/>
+    <settings>
+        <!--驼峰命名-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+<!--类型别名-->
+    <typeAliases>
+        <package name="com.imooc.crud.bean"/>
+    </typeAliases>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+    <!-- 可以配置多个运行环境，但是每个SqlSessionFactory 实例只能选择一个运行环境 -->
+    <environments default="work">
+        <environment id="work">
+            <transactionManager type="JDBC"></transactionManager>
+            <!-- UNPOOLED POOLED JNDI -->
+            <dataSource type="UNPOOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver" />
+                <property name="url" value="${jdbc.jdbcUrl}" />
+                <property name="username" value="root" />
+                <property name="password" value="123" />
+            </dataSource>
+        </environment>
+    </environments>
+</configuration>
